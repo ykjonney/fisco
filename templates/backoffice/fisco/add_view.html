@@ -1,0 +1,84 @@
+{% extends '../base.html' %}
+{% autoescape None %}
+{% block content %}
+{% from db import STATUS_USER_ACTIVE, STATUS_USER_INACTIVE %}
+<div class="main_header pt10 pb10 clear">
+    <div class="fl bread_nav">
+        <a href="{{ reverse_url('backoffice_fisco_list') }}?lang={{lang}}" class="pl10 ml10">数据上链</a>/
+        <span>新增</span>
+    </div>
+    <div class="fr clear">
+        <a href="javascript:void(0);" onclick="self.location=document.referrer;" class="fl back_btn pl20 mr20"><i
+                class="back_i"></i>{{translate('base.return')}}</a>
+    </div>
+</div>
+<div class="edit_info">
+    <div>
+        <h3 class="list_title pr add_manage">新增<i class="add_i_txt"></i></h3>
+    </div>
+    <div class="edit_info_detail">
+        <table class="table_form">
+            <tr>
+                <th width="40%"><span class="necessary">*</span>身份证号码</th>
+                <td><input class="input_text" type="text" name="id_number" id="id_number"></td>
+            </tr>
+            <tr>
+                <th width="40%"><span class="necessary">*</span>定位</th>
+                <td><input class="input_text" type="text" name="position" id="position"></td>
+            </tr>
+            <tr>
+                <th><span class="necessary">*</span>温度</th>
+                <td><input class="input_text" type="text" name="temperature" id="temperature"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                        <span class="cl_danger">
+
+                        </span>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><a href="#" class="btn btn_primary mt15 btn_lg submit_btn">{{translate('base.submit')}}</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    $(function () {
+        // 提交表单
+        $('.submit_btn').on('click', function () {
+            var id_number = $('#id_number').val();
+            var position = $('#position').val();
+            var temperature = $('#temperature').val();
+
+
+            var url = "{{ reverse_url('backoffice_fisco_add') }}";
+            var data = {
+                'id_number': id_number,
+                'position': position,
+                'temperature': temperature,
+            };
+            display_loading();
+            ajaxPost(url, data, function (ret) {
+                if (ret.code == -3) {
+                    $('.cl_danger').html("{{translate('base.full_message')}}");
+                } else if (ret.code == -2) {
+                    $('.cl_danger').html("{{translate('user.name_exist')}}");
+                } else if (ret.code == -1) {
+                    $('.cl_danger').html("{{translate('user.password_not_same')}}");
+                } else if (ret.code == 1) {
+                    tip_msg("{{translate('user.add_success')}}", 2000, function () {
+                        window.location.href = "{{ reverse_url('backoffice_fisco_list') }}?lang={{lang}}";
+                    });
+                } else {
+                    $('.cl_danger').html("{{translate('base.system_err')}}");
+                }
+            });
+            remove_loading();
+        })
+    })
+</script>
+{% end %}

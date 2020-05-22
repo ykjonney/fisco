@@ -1,0 +1,66 @@
+{% extends '../base.html' %}
+{% autoescape None %}
+{% block content %}
+{% from db import STATUS_USER_ACTIVE, STATUS_USER_INACTIVE %}
+<div class="ml10 mr10 pt8 pb8 clear">
+    <a href="{{ reverse_url('backoffice_fisco_add') }}?lang={{lang}}" class="btn btn_i btn_primary btn_lg pr fl">新增<i
+            class="add_manage_i"></i></a>
+    <a href="javascript:window.location.reload();" class="refresh_btn pl20 mr20 fr mt10">
+        <i class="refresh_i"></i>{{translate('base.refresh')}}
+    </a>
+</div>
+<div class="filter_box clear">
+    <div class="filter_condition fl">
+        <span>{{translate('base.filter')}}：</span>
+        <input id="search_name" type="text" class="account" placeholder=""
+               value="{{ string_display(search_name, '') }}">
+
+    </div>
+    <div class="filter_btn fr">
+        <a href="#" class="btn btn_i btn_primary pr mr5 search_data">{{translate('base.search')}}<i class="btn_search"></i></a>
+        <a href="{{ reverse_url('backoffice_fisco_list') }}?lang={{lang}}" class="btn btn_default">{{translate('base.cancel')}}</a>
+    </div>
+</div>
+<div class="data_list pr">
+    <div class="clear">
+        <div class="fl">
+            <h3 class="list_title pr">{{translate('base.data_list')}}<i class="list_title_i"></i></h3>
+        </div>
+
+    </div>
+    <div>
+        <table class="table_list">
+            <tr>
+                <th>用户身份证号码</th>
+                <th>地点</th>
+                <th>时间</th>
+                <th>温度</th>
+
+            </tr>
+            {% for data in data_list %}
+            <tr>
+
+               <td>{{data['user_id_no']}}</td>
+                <td>{{data['position']}}</td>
+                <td>{{data['temperature']}}</td>
+                <td>{{data['time']}}</td>
+            </tr>
+            {% end %}
+
+        </table>
+
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('.search_data').on('click', function () {
+            var param_dict = {
+                'search_name': $('#search_name').val(),
+            };
+            window.location.href = "{{ reverse_url('backoffice_fisco_list') }}?" + dict_2_url_params(param_dict);
+        });
+    })
+</script>
+{% end %}
