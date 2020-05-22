@@ -23,8 +23,8 @@ class client_config:
 
     # contract_info_file = "bin/contract.ini"  # 保存已部署合约信息的文件
     # account_keyfile_path = "bin/accounts"  # 保存keystore文件的路径，在此路径下,keystore文件以 [name].keystore命名
-    # account_keyfile = "pyaccount.keystore"
-    # account_password = "123456"  # 实际使用时建议改为复杂密码
+    account_keyfile = "pyaccount.keystore"
+    account_password = "123456"  # 实际使用时建议改为复杂密码
 
     fiscoChainId = 1  # 链ID，和要通信的节点*必须*一致
     groupid = 1  # 群组ID，和要通信的节点*必须*一致，如和其他群组通信，修改这一项，或者设置bcosclient.py里对应的成员变量
