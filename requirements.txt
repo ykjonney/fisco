@@ -22,7 +22,7 @@ qcloudsms-py==0.1.3
 qiniu==7.2.2
 redis==2.10.6
 redis-py-cluster==1.3.5
-requests==2.19.1
+requests==2.20.0
 tornado==5.0.2
 typing-extensions==3.7.4.1
 urllib3==1.23
