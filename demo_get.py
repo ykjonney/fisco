@@ -24,8 +24,8 @@ from client.bcoserror import BcosException, BcosError
 # 从文件加载abi定义
 if os.path.isfile(client_config.solc_path) or os.path.isfile(client_config.solcjs_path):
     Compiler.compile_file("contracts/HelloWorld.sol")
-    Compiler.compile_file("contracts/SimpleInfo.sol")
-abi_file = "contracts/SimpleInfo.abi"
+    # Compiler.compile_file("contracts/SimpleInfo.sol")
+abi_file = "contracts/HelloWorld.abi"
 data_parser = DatatypeParser()
 data_parser.load_abi_file(abi_file)
 contract_abi = data_parser.contract_abi

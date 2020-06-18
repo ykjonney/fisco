@@ -53,7 +53,6 @@ class InstantSms(BaseModel):
 
     _indexes = ['sms_server', 'account', 'status', 'post_dt', 'mobile']
 
-
 class AdministrativeDivision(BaseModel):
     """
     行政区划
@@ -94,6 +93,7 @@ class AdministrativeDivision(BaseModel):
     _indexes = ['code', 'parent_code', 'title', 'en_title', 'level']
 
 
+
 class UploadFiles(BaseModel):
     code = StringField(required=True, max_length=64)  # 文件编号
     title = StringField(required=True, max_length=64)  # 文件名
@@ -104,6 +104,59 @@ class UploadFiles(BaseModel):
 
     _indexes = ['code', 'category', 'size']
 
+class Score(BaseModel):
+    stu_weid = StringField()
+    subject = StringField()
+    score = FloatField()
+    start_time = IntegerField()
+    end_time = IntegerField()
+    hash_link = StringField()
+    tx_hash = StringField()
+    credential = IntegerField(default=0)
+
+class Subject(BaseModel):
+    issuer = StringField()
+    category = IntegerField()
+    title = StringField()
+    max_score = FloatField(default=0)
+    status = IntegerField(default=0)
+    id_number = StringField()
+    tx_hash = StringField()
+
+class Teacher(BaseModel):
+    weid = StringField()
+    name = StringField()
+    teacher_id = StringField()
+    school = StringField()
+
+class School(BaseModel):
+    name = StringField()
+
+class Company(BaseModel):
+    name = StringField()
+    location = StringField()
+    business = StringField()
+    weid = StringField()
+    status = IntegerField(default=0)
+    tx_hash = StringField()
+
+class Student(BaseModel):
+    name = StringField()
+    stuId = StringField()
+    idCard = StringField()
+    school = StringField()
+    weid = StringField()
+    tx_hash = StringField()
+
+class Cpt(BaseModel):
+    cptTitle = StringField()
+    cptId = StringField()
+    cptVersion = StringField()
+    subject = StringField()
+
+class Credential(BaseModel):
+    res = DictField()
+    student = StringField()
 
 class User(BaseModel):
     """

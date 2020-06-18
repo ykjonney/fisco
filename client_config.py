@@ -32,15 +32,16 @@ class client_config:
     # ---------client communication config--------------
     client_protocol = "channel"  # or PROTOCOL_CHANNEL to use channel prototol
     # client_protocol = PROTOCOL_CHANNEL
-    remote_rpcurl = "http://127.0.0.1:8545"  # 采用rpc通信时，节点的rpc端口,和要通信的节点*必须*一致,如采用channel协议通信，这里可以留空
-    channel_host = "127.0.0.1"  # 采用channel通信时，节点的channel ip地址,如采用rpc协议通信，这里可以留空
+    remote_rpcurl = "http://192.168.1.116:8545"  # 采用rpc通信时，节点的rpc端口,和要通信的节点*必须*一致,如采用channel协议通信，这里可以留空
+    channel_host = "192.168.1.116"  # 采用channel通信时，节点的channel ip地址,如采用rpc协议通信，这里可以留空
     channel_port = 20200  # 节点的channel 端口,如采用rpc协议通信，这里可以留空
-    # channel_ca = "bin/ca.crt"  # 采用channel协议时，需要设置链证书,如采用rpc协议通信，这里可以留空
-    # channel_node_cert = "bin/sdk.crt"  # 采用channel协议时，需要设置sdk证书,如采用rpc协议通信，这里可以留空
-    # channel_node_key = "bin/sdk.key"   # 采用channel协议时，需要设置sdk私钥,如采用rpc协议通信，这里可以留空
+    channel_ca = "bin/ca.crt"  # 采用channel协议时，需要设置链证书,如采用rpc协议通信，这里可以留空
+    channel_node_cert = "bin/node.crt"  # 采用channel协议时，需要设置sdk证书,如采用rpc协议通信，这里可以留空
+    channel_node_key = "bin/node.key"   # 采用channel协议时，需要设置sdk私钥,如采用rpc协议通信，这里可以留空
     # ---------console mode, support user input--------------
     background = True
     # ---------compiler related--------------
     # path of solc compiler
-    solc_path = os.environ["HOME"] + "/.py-solc/solc-v0.4.25/bin/solc"
+    # solc_path = os.environ["HOME"] + "/.py-solc/solc-v0.4.25/bin/solc"
+    solc_path = os.environ["HOME"]+"/solc"
     solcjs_path = "./solcjs"

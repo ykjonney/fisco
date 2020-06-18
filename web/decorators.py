@@ -3,6 +3,7 @@
 import json
 from commons import menu_utils
 from commons.common_utils import ComplexJsonEncoder
+from db.models import Student, Teacher, Company
 
 
 class ResultData(object):
@@ -143,5 +144,42 @@ def wechat_applet_authenticated(func):
             self.write(str({'code': -3}))
         else:
             return await func(self, *args, **kwargs)
+
+    return wrapper
+
+def app_authenticated(func):
+    async def wrapper(self, *args, **kwargs):
+        if not self.get_i_argument('access_token'):
+            # 没有Access Token
+            # self.write(str({'code': -1}))
+            return {'code': -1}
+        elif not self.get_i_argument('timestamp'):
+            # 没有时间戳
+            # self.write(str({'code': -2}))
+            return {'code': -2}
+        elif not self.get_i_argument('signature'):
+            # 没有签名或签名错误
+            # self.write(str({'code': -3}))
+            return {'code': -3}
+        elif not self.get_i_argument('app_user_cid'):
+            # 没有用户cid
+            # self.write(str({'code': -4}))
+            return {'code': -4}
+        else:
+            category = self.get_i_argument('category')
+            cid = self.get_i_argument('app_user_cid')
+            if category==0:
+                user =await Student.get_by_cid(cid)
+            elif category==1:
+                user =await Company.get_by_cid(cid)
+            else:
+                user =await Teacher.get_by_cid(cid)
+            if user:
+                self.current_user = user
+                return await func(self, *args, **kwargs)
+            else:
+                # 用户cid错误
+                # self.write(str({'code': -5}))
+                return {'code': -5}
 
     return wrapper

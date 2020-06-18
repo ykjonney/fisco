@@ -163,6 +163,17 @@ class BaseHandler(BaseMiddlewareHandler):
             return locale.get('zh_CN')
         return locale.get('zh_CN')
 
+    def set_default_headers(self):
+        # 后面的*可以换成ip地址，意为允许访问的地址
+        self.set_header('Access-Control-Allow-Origin', '*')
+        self.set_header('Access-Control-Allow-Headers',
+                        'Content-Type,Content-Length, Authorization, Accept,x-requested-with')
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE,OPTIONS')
+
+    def options(self):
+        self.set_status(204)
+        self.finish()
+
 class NonXsrfBaseHandler(BaseHandler):
 
     def check_xsrf_cookie(self):

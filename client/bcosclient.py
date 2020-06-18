@@ -63,7 +63,7 @@ class BcosClient:
     def load_default_account(self):
         try:
 
-            self.client_account = Account.from_key(0xaf7350f366baddd72c5cfd80c728389a10f33626ce5c0c1b8dc672e7008928d1)
+            self.client_account = Account.from_key(0xfb06406e4bd0f81ade6bd7da2015f634d52651e0e2dac8caeca1a8044b17ec48)
             # with open(self.keystore_file, "r") as dump_f:
             #     keytext = json.load(dump_f)
             #     privkey = Account.decrypt(keytext, client_config.account_password)
